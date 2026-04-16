@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CropSense — AI-powered Crop Yield Prediction Portal. Analyze weather, compare crops, estimate revenue, and get smart farming recommendations.">
+  <title>CropSense — Crop Yield Prediction Portal</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <!-- ─── TOAST CONTAINER ────────────────────────── -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ─── NAVIGATION ──────────────────────────── -->
+  <nav id="navbar" class="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-icon">🌾</span>
+        <span class="logo-text">CropSense</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#dashboard" id="nav-dashboard-link">Dashboard</a></li>
+        <li><a href="#predict">Predict</a></li>
+        <li><a href="#compare-section">Compare</a></li>
+        <li><a href="#history-section" id="nav-history-link">History</a></li>
+        <li><a href="#results" id="nav-results-link" class="hidden">Results</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ─── MOBILE MENU OVERLAY ────────────────────── -->
+  <div class="mobile-menu-overlay hidden" id="mobile-menu-overlay">
+    <div class="mobile-menu">
+      <ul>
+        <li><a href="#hero" class="mobile-nav-link">Home</a></li>
+        <li><a href="#features" class="mobile-nav-link">Features</a></li>
+        <li><a href="#dashboard" class="mobile-nav-link">Dashboard</a></li>
+        <li><a href="#predict" class="mobile-nav-link">Predict</a></li>
+        <li><a href="#compare-section" class="mobile-nav-link">Compare</a></li>
+        <li><a href="#history-section" class="mobile-nav-link">History</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ─── HERO SECTION ────────────────────────── -->
+  <section id="hero" class="hero">
+    <div class="hero-bg">
+      <div class="hero-gradient"></div>
+      <div class="hero-particles" id="particles"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i data-lucide="leaf" class="badge-icon"></i>
+        <span>AI-Powered Agriculture</span>
+      </div>
+      <h1 class="hero-title">
+        Predict Your Crop Yield<br>
+        <span class="gradient-text">With Weather Intelligence</span>
+      </h1>
+      <p class="hero-subtitle">
+        Analyze real-time weather conditions, compare crops, estimate revenue, and get 
+        smart farming recommendations — all powered by multi-factor analysis.
+      </p>
+      <div class="hero-cta">
+        <a href="#predict" class="btn btn-primary btn-lg" id="cta-predict">
+          <i data-lucide="bar-chart-3"></i>
+          Start Prediction
+        </a>
+        <a href="#dashboard" class="btn btn-outline btn-lg">
+          <i data-lucide="cloud-sun"></i>
+          Weather Dashboard
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number" data-count="20">0</span>
+          <span class="stat-label">Crops Supported</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-count="6">0</span>
+          <span class="stat-label">Analysis Factors</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-count="10">0</span>
+          <span class="stat-label">Years Historical Data</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <i data-lucide="chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- ─── FEATURES SECTION ────────────────────── -->
+  <section id="features" class="section features-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Why CropSense?</span>
+        <h2 class="section-title">Intelligent Farming Starts Here</h2>
+        <p class="section-desc">Our multi-factor analysis engine combines real-time weather data with agronomic science to deliver reliable yield predictions.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card" data-delay="0">
+          <div class="feature-icon-wrap">
+            <i data-lucide="cloud-sun"></i>
+          </div>
+          <h3>Real-Time Weather</h3>
+          <p>Live weather data and 7-day forecasts powered by Open-Meteo. No API keys required.</p>
+        </div>
+        <div class="feature-card" data-delay="100">
+          <div class="feature-icon-wrap">
+            <i data-lucide="brain"></i>
+          </div>
+          <h3>Smart Prediction</h3>
+          <p>Multi-factor scoring algorithm analyzing temperature, rainfall, humidity, season & soil.</p>
+        </div>
+        <div class="feature-card" data-delay="200">
+          <div class="feature-icon-wrap">
+            <i data-lucide="git-compare"></i>
+          </div>
+          <h3>Crop Comparison</h3>
+          <p>Compare multiple crops side-by-side to find the most profitable option for your farm.</p>
+        </div>
+        <div class="feature-card" data-delay="300">
+          <div class="feature-icon-wrap">
+            <i data-lucide="trophy"></i>
+          </div>
+          <h3>Best-Fit Analyzer</h3>
+          <p>Auto-discover which crop performs best for your specific location, soil, and season.</p>
+        </div>
+        <div class="feature-card" data-delay="400">
+          <div class="feature-icon-wrap">
+            <i data-lucide="indian-rupee"></i>
+          </div>
+          <h3>Revenue Estimator</h3>
+          <p>Estimated income from MSP and market prices, minus cultivation costs for profit projection.</p>
+        </div>
+        <div class="feature-card" data-delay="500">
+          <div class="feature-icon-wrap">
+            <i data-lucide="shield-alert"></i>
+          </div>
+          <h3>Disease Risk Alerts</h3>
+          <p>Weather-based pest and disease risk predictions with preventive recommendations.</p>
+        </div>
+        <div class="feature-card" data-delay="600">
+          <div class="feature-icon-wrap">
+            <i data-lucide="droplets"></i>
+          </div>
+          <h3>Irrigation Calculator</h3>
+          <p>Calculate water needs and irrigation schedules based on weather and crop type.</p>
+        </div>
+        <div class="feature-card" data-delay="700">
+          <div class="feature-icon-wrap">
+            <i data-lucide="history"></i>
+          </div>
+          <h3>Prediction History</h3>
+          <p>Save, review, and compare your past predictions to track conditions over time.</p>
+        </div>
+        <div class="feature-card" data-delay="800">
+          <div class="feature-icon-wrap">
+            <i data-lucide="download"></i>
+          </div>
+          <h3>Export Reports</h3>
+          <p>Download prediction results as PDF reports or export raw data as CSV/JSON.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── WEATHER DASHBOARD SECTION ──────────────── -->
+  <section id="dashboard" class="section dashboard-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Live Weather</span>
+        <h2 class="section-title">Weather Dashboard</h2>
+        <p class="section-desc">Get real-time weather data for any location worldwide.</p>
+      </div>
+
+      <div class="dashboard-search">
+        <div class="input-with-btn">
+          <input type="text" id="dashboard-city-input" placeholder="Enter city name for weather data..." autocomplete="off">
+          <button type="button" id="dashboard-gps-btn" class="btn btn-outline btn-sm gps-btn" title="Use my location">
+            <i data-lucide="locate"></i>
+          </button>
+          <button type="button" id="dashboard-search-btn" class="btn btn-accent btn-sm">
+            <i data-lucide="search"></i>
+            Search
+          </button>
+        </div>
+        <div id="dashboard-city-results" class="city-results hidden"></div>
+      </div>
+
+      <div id="dashboard-content" class="dashboard-content hidden">
+        <div class="dashboard-location-bar" id="dashboard-location-bar"></div>
+
+        <!-- Weather stat cards -->
+        <div class="weather-stats-grid" id="weather-stats-grid">
+          <div class="weather-stat-card wsc-temp">
+            <div class="wsc-icon"><i data-lucide="thermometer"></i></div>
+            <div class="wsc-data">
+              <span class="wsc-value" id="dash-temp">—</span>
+              <span class="wsc-label">Temperature</span>
+            </div>
+          </div>
+          <div class="weather-stat-card wsc-feels">
+            <div class="wsc-icon"><i data-lucide="sun"></i></div>
+            <div class="wsc-data">
+              <span class="wsc-value" id="dash-feels">—</span>
+              <span class="wsc-label">Feels Like</span>
+            </div>
+          </div>
+          <div class="weather-stat-card wsc-humidity">
+            <div class="wsc-icon"><i data-lucide="droplets"></i></div>
+            <div class="wsc-data">
+              <span class="wsc-value" id="dash-humidity">—</span>
+              <span class="wsc-label">Humidity</span>
+            </div>
+          </div>
+          <div class="weather-stat-card wsc-wind">
+            <div class="wsc-icon"><i data-lucide="wind"></i></div>
+            <div class="wsc-data">
+              <span class="wsc-value" id="dash-wind">—</span>
+              <span class="wsc-label">Wind Speed</span>
+            </div>
+          </div>
+          <div class="weather-stat-card wsc-pressure">
+            <div class="wsc-icon"><i data-lucide="gauge"></i></div>
+            <div class="wsc-data">
+              <span class="wsc-value" id="dash-pressure">—</span>
+              <span class="wsc-label">Pressure</span>
+            </div>
+          </div>
+          <div class="weather-stat-card wsc-precip">
+            <div class="wsc-icon"><i data-lucide="cloud-rain"></i></div>
+            <div class="wsc-data">
+              <span class="wsc-value" id="dash-precip">—</span>
+              <span class="wsc-label">Precipitation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7-day forecast cards -->
+        <h3 class="dash-sub-title"><i data-lucide="calendar-days"></i> 7-Day Forecast</h3>
+        <div class="forecast-cards-row" id="forecast-cards-row"></div>
+
+        <!-- Dashboard forecast chart -->
+        <div class="chart-card chart-card-full">
+          <div class="chart-header">
+            <h3><i data-lucide="area-chart"></i> Temperature & Precipitation Trend</h3>
+          </div>
+          <div class="chart-body chart-body-wide">
+            <canvas id="dashboard-forecast-chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PREDICTION FORM SECTION ─────────────── -->
+  <section id="predict" class="section predict-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Predict Now</span>
+        <h2 class="section-title">Enter Your Farming Details</h2>
+        <p class="section-desc">Fill in the details below and we'll analyze weather conditions to predict your expected crop yield.</p>
+      </div>
+
+      <form id="prediction-form" class="prediction-form">
+        <div class="form-grid">
+          <!-- Location -->
+          <div class="form-group form-group-full">
+            <label for="city-input">
+              <i data-lucide="map-pin"></i>
+              Location
+            </label>
+            <div class="input-with-btn">
+              <input type="text" id="city-input" placeholder="Enter city name (e.g., New Delhi, Mumbai, Lucknow)" required autocomplete="off">
+              <button type="button" id="gps-btn" class="btn btn-outline btn-sm gps-btn" title="Use my location">
+                <i data-lucide="locate"></i>
+              </button>
+              <button type="button" id="search-city-btn" class="btn btn-accent btn-sm">
+                <i data-lucide="search"></i>
+                Search
+              </button>
+            </div>
+            <div id="city-results" class="city-results hidden"></div>
+            <div id="selected-location" class="selected-location hidden"></div>
+          </div>
+
+          <!-- Crop -->
+          <div class="form-group">
+            <label for="crop-select">
+              <i data-lucide="sprout"></i>
+              Select Crop
+            </label>
+            <select id="crop-select" required>
+              <option value="">Choose a crop...</option>
+            </select>
+            <div id="crop-info" class="crop-info hidden"></div>
+          </div>
+
+          <!-- Season -->
+          <div class="form-group">
+            <label for="season-select">
+              <i data-lucide="calendar"></i>
+              Growing Season
+            </label>
+            <select id="season-select" required>
+              <option value="">Choose season...</option>
+            </select>
+          </div>
+
+          <!-- Soil Type -->
+          <div class="form-group">
+            <label for="soil-select">
+              <i data-lucide="mountain"></i>
+              Soil Type
+            </label>
+            <select id="soil-select" required>
+              <option value="">Choose soil type...</option>
+            </select>
+          </div>
+
+          <!-- Area -->
+          <div class="form-group">
+            <label for="area-input">
+              <i data-lucide="maximize-2"></i>
+              Farm Area (hectares)
+            </label>
+            <input type="number" id="area-input" placeholder="e.g., 5" min="0.1" step="0.1" required>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-actions">
+          <button type="submit" id="predict-btn" class="btn btn-primary btn-lg btn-glow" disabled>
+            <i data-lucide="zap"></i>
+            <span>Predict Yield</span>
+          </button>
+          <button type="button" id="best-crop-btn" class="btn btn-outline btn-lg" disabled style="margin-left:1rem">
+            <i data-lucide="trophy"></i>
+            <span>Find Best Crop</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ─── CROP COMPARISON SECTION ────────────────── -->
+  <section id="compare-section" class="section compare-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Compare</span>
+        <h2 class="section-title">Crop Comparison Tool</h2>
+        <p class="section-desc">Select multiple crops to compare their predicted yields, revenues, and suitability side-by-side.</p>
+      </div>
+
+      <div class="compare-form">
+        <div class="compare-form-row">
+          <div class="form-group">
+            <label><i data-lucide="sprout"></i> Select Crops (2-6)</label>
+            <div class="crop-checkbox-grid" id="compare-crop-grid"></div>
+          </div>
+        </div>
+        <div class="compare-info-text" id="compare-info-text">
+          <i data-lucide="info"></i> <span>First set your location, season, soil, and area in the Predict section above, then select crops to compare.</span>
+        </div>
+        <div class="form-actions">
+          <button type="button" id="compare-btn" class="btn btn-primary btn-lg" disabled>
+            <i data-lucide="git-compare"></i>
+            <span>Compare Crops</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Comparison Results -->
+      <div id="compare-results" class="compare-results hidden">
+        <div class="compare-table-wrap">
+          <table class="compare-table" id="compare-table">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="chart-card chart-card-full" style="margin-top:2rem">
+          <div class="chart-header">
+            <h3><i data-lucide="bar-chart-3"></i> Yield Comparison</h3>
+          </div>
+          <div class="chart-body chart-body-wide">
+            <canvas id="compare-chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── BEST-FIT RESULTS (injected dynamically) ── -->
+  <section id="bestfit-section" class="section bestfit-section hidden">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Best Fit</span>
+        <h2 class="section-title">🏆 Best Crops For Your Conditions</h2>
+        <p class="section-desc" id="bestfit-subtitle"></p>
+      </div>
+      <div class="bestfit-grid" id="bestfit-grid"></div>
+    </div>
+  </section>
+
+  <!-- ─── LOADING OVERLAY ─────────────────────── -->
+  <div id="loading-overlay" class="loading-overlay hidden">
+    <div class="loading-content">
+      <div class="loading-spinner">
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring"></div>
+      </div>
+      <h3 id="loading-text">Analyzing Weather Data...</h3>
+      <p id="loading-subtext">Fetching real-time weather conditions</p>
+      <div class="loading-steps">
+        <div class="loading-step active" id="step-weather">
+          <i data-lucide="cloud"></i>
+          <span>Weather Data</span>
+        </div>
+        <div class="loading-step" id="step-analysis">
+          <i data-lucide="cpu"></i>
+          <span>Analysis</span>
+        </div>
+        <div class="loading-step" id="step-prediction">
+          <i data-lucide="check-circle"></i>
+          <span>Prediction</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── RESULTS SECTION ─────────────────────── -->
+  <section id="results" class="section results-section hidden">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Results</span>
+        <h2 class="section-title">Yield Prediction Report</h2>
+        <p class="section-desc" id="results-subtitle"></p>
+      </div>
+
+      <!-- Export Buttons -->
+      <div class="export-bar">
+        <button type="button" id="export-pdf-btn" class="btn btn-outline btn-sm">
+          <i data-lucide="file-text"></i> Export PDF
+        </button>
+        <button type="button" id="export-csv-btn" class="btn btn-outline btn-sm">
+          <i data-lucide="table"></i> Export CSV
+        </button>
+        <button type="button" id="export-json-btn" class="btn btn-outline btn-sm">
+          <i data-lucide="braces"></i> Export JSON
+        </button>
+        <button type="button" id="save-prediction-btn" class="btn btn-accent btn-sm">
+          <i data-lucide="bookmark"></i> Save to History
+        </button>
+      </div>
+
+      <!-- Top Stats Cards -->
+      <div class="results-hero-grid">
+        <div class="result-hero-card yield-card">
+          <div class="rhc-icon"><i data-lucide="trending-up"></i></div>
+          <div class="rhc-content">
+            <span class="rhc-label">Predicted Total Yield</span>
+            <span class="rhc-value" id="result-total-yield">—</span>
+            <span class="rhc-sub" id="result-per-hectare">—</span>
+          </div>
+        </div>
+        <div class="result-hero-card confidence-card">
+          <div class="rhc-icon"><i data-lucide="target"></i></div>
+          <div class="rhc-content">
+            <span class="rhc-label">Confidence Score</span>
+            <span class="rhc-value" id="result-confidence">—</span>
+            <span class="rhc-sub" id="result-rating">—</span>
+          </div>
+        </div>
+        <div class="result-hero-card weather-card">
+          <div class="rhc-icon"><i data-lucide="thermometer"></i></div>
+          <div class="rhc-content">
+            <span class="rhc-label">Current Temperature</span>
+            <span class="rhc-value" id="result-temp">—</span>
+            <span class="rhc-sub" id="result-weather-desc">—</span>
+          </div>
+        </div>
+        <div class="result-hero-card rain-card">
+          <div class="rhc-icon"><i data-lucide="droplets"></i></div>
+          <div class="rhc-content">
+            <span class="rhc-label">Seasonal Rainfall</span>
+            <span class="rhc-value" id="result-rain">—</span>
+            <span class="rhc-sub" id="result-humidity">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Revenue Estimator Panel -->
+      <div class="revenue-panel" id="revenue-panel">
+        <h3 class="panel-title"><i data-lucide="indian-rupee"></i> Revenue Estimator</h3>
+        <div class="revenue-grid" id="revenue-grid"></div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3><i data-lucide="pie-chart"></i> Factor Breakdown</h3>
+          </div>
+          <div class="chart-body">
+            <canvas id="factors-chart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-header">
+            <h3><i data-lucide="bar-chart-3"></i> Factor Scores</h3>
+          </div>
+          <div class="chart-body">
+            <canvas id="scores-chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weather Forecast Chart -->
+      <div class="chart-card chart-card-full">
+        <div class="chart-header">
+          <h3><i data-lucide="cloud-sun"></i> 7-Day Weather Forecast</h3>
+        </div>
+        <div class="chart-body chart-body-wide">
+          <canvas id="forecast-chart"></canvas>
+        </div>
+      </div>
+
+      <!-- Factor Details -->
+      <div class="factor-details-grid" id="factor-details-grid"></div>
+
+      <!-- Irrigation Calculator Panel -->
+      <div class="irrigation-panel" id="irrigation-panel">
+        <h3 class="panel-title"><i data-lucide="droplets"></i> Irrigation Calculator</h3>
+        <div class="irrigation-grid" id="irrigation-grid"></div>
+      </div>
+
+      <!-- Disease Risk Panel -->
+      <div class="disease-panel" id="disease-panel">
+        <h3 class="panel-title"><i data-lucide="shield-alert"></i> Disease Risk Assessment</h3>
+        <div class="disease-grid" id="disease-grid"></div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="recommendations-section">
+        <h3 class="rec-title"><i data-lucide="lightbulb"></i> Smart Recommendations</h3>
+        <div class="recommendations-grid" id="recommendations-grid"></div>
+      </div>
+
+      <!-- New Prediction Button -->
+      <div class="form-actions" style="margin-top: 3rem">
+        <button type="button" id="new-prediction-btn" class="btn btn-outline btn-lg">
+          <i data-lucide="refresh-cw"></i>
+          New Prediction
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PREDICTION HISTORY SECTION ─────────────── -->
+  <section id="history-section" class="section history-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">History</span>
+        <h2 class="section-title">Prediction History</h2>
+        <p class="section-desc">Your saved predictions are stored locally in your browser.</p>
+      </div>
+      <div id="history-empty" class="history-empty">
+        <i data-lucide="archive"></i>
+        <p>No saved predictions yet. Run a prediction and click "Save to History" to keep it here.</p>
+      </div>
+      <div id="history-grid" class="history-grid"></div>
+      <div class="form-actions" id="history-clear-wrap" class="hidden" style="margin-top:2rem">
+        <button type="button" id="clear-history-btn" class="btn btn-outline btn-sm hidden">
+          <i data-lucide="trash-2"></i>
+          Clear All History
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ──────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="logo-icon">🌾</span>
+          <span class="logo-text">CropSense</span>
+          <p>Intelligent crop yield prediction powered by real-time weather data and multi-factor analysis.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <a href="#hero">Home</a>
+          <a href="#features">Features</a>
+          <a href="#predict">Predict</a>
+          <a href="#compare-section">Compare</a>
+          <a href="#history-section">History</a>
+        </div>
+        <div class="footer-links">
+          <h4>Technology</h4>
+          <a href="https://open-meteo.com" target="_blank">Open-Meteo API</a>
+          <a href="https://www.chartjs.org" target="_blank">Chart.js</a>
+          <a href="https://expressjs.com" target="_blank">Express.js</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 CropSense — Crop Yield Prediction Portal. Built for smarter farming.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App Script -->
+  <script src="/js/app.js"></script>
+</body>
+</html>
